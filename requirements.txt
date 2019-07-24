@@ -1,0 +1,8 @@
+django
+djangorestframework
+python-igraph
+osmnx
+networkx
+scikit-learn
+pathos
+tqdm
