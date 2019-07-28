@@ -8,8 +8,15 @@ from django.conf import settings
 
 from .osmnx_utils import retrieve_roads
 
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 
 class GraphRetrievalView(APIView):
+    @swagger_auto_schema(
+        request_body=GraphRetrievalSerializer,
+        operation_id="Retrieve Roads",
+        operation_description="Retrieve and store graph road network of specified country."
+    )
     def post(self, request, *args, **kwargs):
 
         serializer = GraphRetrievalSerializer(data=request.data)

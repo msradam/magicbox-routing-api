@@ -14,9 +14,16 @@ import igraph as ig
 
 from .dist_utils import csv_utils, straight_line_dist, site_routing
 
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 
 class GeoPointsView(APIView):
     parser_classes = (MultiPartParser, FormParser)
+    @swagger_auto_schema(
+        request_body=GeoPointsSerializer,
+        operation_id ="Compute Distances",
+        operation_description="Retrieve updated .csv of origin points with distances to nearest destination points.",
+    )
     def post(self, request, *args, **kwargs):
 
         def csv_to_df(key):
