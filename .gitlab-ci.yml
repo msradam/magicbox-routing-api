@@ -1,0 +1,13 @@
+variables:
+  HEROKU_APP_NAME: 'magicbox-routing'
+
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app='magicbox-routing' --api-key='6bd1183d-d43f-4cf3-8016-98300d1f279a'
