@@ -1,15 +1,29 @@
-# 🌐 Magicbox Routing API
+# 🌐 Magicbox Routing API ![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge)
 Utilities to retrieve road networks and compute distances between geospatial coordinates for UNICEF's Magicbox.
+
+The app is live and is deployed [here](http://magicbox-routing.herokuapp.com) !
 
 ![Screenshot](https://raw.githubusercontent.com/msradam/magicbox-routing-api/master/misc/screenshot.png)
 
 ## Setup
-Note: `sudo` is needed if you are not in the `docker` user group on your system.
+Note: `sudo` is needed if you are not in the `docker` user group on your system. 
+
+First, clone the repository to your system, then:
 ```
-sudo docker-compose build
-sudo docker-compose up
+cd magicbox-routing-api
+docker build -t web:latest .
+docker run -d --name geo_routing -e "PORT=8765" -e "DEBUG=1" -p 8007:8765 web:latest
 ```
-The app will run on `http://0.0.0.0:8000`, which will display the API documentation with the appropriate endpoints. 
+This will start up a Docker container named 'geo_routing' running on `http://localhost:8007/`, which will display the API documentation with the appropriate endpoints. 
+
+To stop the container at any time, run:
+```
+docker stop geo_routing
+```
+And to remove:
+```
+docker rm geo_routing
+```
 
 ## Distances
 
@@ -64,6 +78,6 @@ filepath allows you to specify an absolute path in local storage for the graph t
 
 ## In-Progress
 * Travis CI integration
-* MongoDB storage for graphs
+* PostgreSQL storage for graphs
 * Kepler.gl interface as a frontend
 * Additional API endpoints to extend functionality
