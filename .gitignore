@@ -1,6 +1,3 @@
-cache/
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
+__pycache__
+*.pyc
+db.sqlite3

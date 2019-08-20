@@ -1,9 +1,16 @@
 FROM ubuntu:latest
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-RUN mkdir /geo_api 
-WORKDIR /geo_api
-ADD . /geo_api/
+ENV DEBUG 0
+
 RUN apt-get -y update && apt-get -y install build-essential libxml2-dev zlib1g-dev python3-dev python3-pip pkg-config libffi-dev libcairo-dev libspatialindex-dev
+
+COPY ./requirements.txt .
+
 RUN pip3 install -r requirements.txt
-EXPOSE 8000
-CMD ["python3","geo_api/manage.py", "runserver"]
+
+COPY . . 
+
+CMD gunicorn geo_routing.wsgi:application --bind 0.0.0.0:$PORT
