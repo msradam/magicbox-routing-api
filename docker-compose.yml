@@ -3,7 +3,7 @@ version: '3'
 services:
   web:
     build: .
-    command: bash -c "python3 geo_api/manage.py makemigrations && python3 geo_api/manage.py migrate && python3 geo_api/manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python3 manage.py makemigrations && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
     container_name: geo_api
     volumes:
       - .:/geo_api
